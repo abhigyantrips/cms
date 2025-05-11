@@ -1,4 +1,4 @@
-import { isSuperAdmin } from '@/access/isSuperAdmin'
+import { isSuperAdmin } from '@/lib/is-super-admin'
 import { getUserTenantIDs } from '@/utilities/getUserTenantIDs'
 import { Access } from 'payload'
 
