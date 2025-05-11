@@ -4,14 +4,14 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
-import { Pages } from './collections/Pages'
-import { Tenants } from './collections/Tenants'
-import Users from './collections/Users'
+import { Pages } from '@/collections/Pages'
+import { Tenants } from '@/collections/Tenants'
+import Users from '@/collections/Users'
 import { multiTenantPlugin } from '@payloadcms/plugin-multi-tenant'
 import { isSuperAdmin } from '@/lib/is-super-admin'
-import type { Config } from './payload-types'
-import { getUserTenantIDs } from './utilities/getUserTenantIDs'
-import { seed } from './seed'
+import type { Config } from '@payload-types'
+import { getUserTenantIDs } from '@/utilities/getUserTenantIDs'
+import { seed } from '@/seed'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,7 +38,7 @@ export default buildConfig({
   },
   secret: process.env.PAYLOAD_SECRET as string,
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, 'types', 'payload.ts'),
   },
   plugins: [
     multiTenantPlugin<Config>({

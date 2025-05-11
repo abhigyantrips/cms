@@ -1,4 +1,4 @@
-import type { Tenant, User } from '../payload-types'
+import type { Tenant, User } from '@payload-types'
 import { extractID } from './extractID'
 
 /**
