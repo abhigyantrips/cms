@@ -1,6 +1,6 @@
-import type { Page } from '@payload-types'
+import React from 'react';
 
-import React from 'react'
+import type { Page } from '@payload-types';
 
 export const RenderPage = ({ data }: { data: Page }) => {
   return (
@@ -12,5 +12,5 @@ export const RenderPage = ({ data }: { data: Page }) => {
 
       <code>{JSON.stringify(data)}</code>
     </React.Fragment>
-  )
-}
+  );
+};

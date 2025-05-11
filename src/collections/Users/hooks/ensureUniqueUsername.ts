@@ -1,16 +1,22 @@
-import type { FieldHook, Where } from 'payload'
+import type { FieldHook, Where } from 'payload';
+import { ValidationError } from 'payload';
 
-import { ValidationError } from 'payload'
+import { getTenantFromCookie } from '@payloadcms/plugin-multi-tenant/utilities';
 
-import { getUserTenantIDs } from '../../../utilities/getUserTenantIDs'
-import { extractID } from '@/utilities/extractID'
-import { getTenantFromCookie } from '@payloadcms/plugin-multi-tenant/utilities'
-import { getCollectionIDType } from '@/utilities/getCollectionIDType'
+import { extractID } from '@/utilities/extractID';
+import { getCollectionIDType } from '@/utilities/getCollectionIDType';
 
-export const ensureUniqueUsername: FieldHook = async ({ data, originalDoc, req, value }) => {
+import { getUserTenantIDs } from '../../../utilities/getUserTenantIDs';
+
+export const ensureUniqueUsername: FieldHook = async ({
+  data,
+  originalDoc,
+  req,
+  value,
+}) => {
   // if value is unchanged, skip validation
   if (originalDoc.username === value) {
-    return value
+    return value;
   }
 
   const constraints: Where[] = [
@@ -19,19 +25,19 @@ export const ensureUniqueUsername: FieldHook = async ({ data, originalDoc, req, 
         equals: value,
       },
     },
-  ]
+  ];
 
   const selectedTenant = getTenantFromCookie(
     req.headers,
-    getCollectionIDType({ payload: req.payload, collectionSlug: 'tenants' }),
-  )
+    getCollectionIDType({ payload: req.payload, collectionSlug: 'tenants' })
+  );
 
   if (selectedTenant) {
     constraints.push({
       'tenants.tenant': {
         equals: selectedTenant,
       },
-    })
+    });
   }
 
   const findDuplicateUsers = await req.payload.find({
@@ -39,10 +45,10 @@ export const ensureUniqueUsername: FieldHook = async ({ data, originalDoc, req, 
     where: {
       and: constraints,
     },
-  })
+  });
 
   if (findDuplicateUsers.docs.length > 0 && req.user) {
-    const tenantIDs = getUserTenantIDs(req.user)
+    const tenantIDs = getUserTenantIDs(req.user);
     // if the user is an admin or has access to more than 1 tenant
     // provide a more specific error message
     if (req.user.roles?.includes('super-admin') || tenantIDs.length > 1) {
@@ -50,7 +56,7 @@ export const ensureUniqueUsername: FieldHook = async ({ data, originalDoc, req, 
         // @ts-ignore - selectedTenant will match DB ID type
         id: selectedTenant,
         collection: 'tenants',
-      })
+      });
 
       throw new ValidationError({
         errors: [
@@ -59,7 +65,7 @@ export const ensureUniqueUsername: FieldHook = async ({ data, originalDoc, req, 
             path: 'username',
           },
         ],
-      })
+      });
     }
 
     throw new ValidationError({
@@ -69,8 +75,8 @@ export const ensureUniqueUsername: FieldHook = async ({ data, originalDoc, req, 
           path: 'username',
         },
       ],
-    })
+    });
   }
 
-  return value
-}
+  return value;
+};

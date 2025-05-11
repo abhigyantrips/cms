@@ -1,22 +1,24 @@
-import { getUserTenantIDs } from '@/utilities/getUserTenantIDs'
-import { isSuperAdmin } from '@/lib/is-super-admin'
-import { Access } from 'payload'
+import { Access } from 'payload';
+
+import { isSuperAdmin } from '@/lib/is-super-admin';
+
+import { getUserTenantIDs } from '@/utilities/getUserTenantIDs';
 
 /**
  * Tenant admins and super admins can will be allowed access
  */
 export const superAdminOrTenantAdminAccess: Access = ({ req }) => {
   if (!req.user) {
-    return false
+    return false;
   }
 
   if (isSuperAdmin(req.user)) {
-    return true
+    return true;
   }
 
   return {
     tenant: {
       in: getUserTenantIDs(req.user, 'tenant-admin'),
     },
-  }
-}
+  };
+};

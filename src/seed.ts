@@ -1,6 +1,8 @@
-import { Config } from 'payload'
+import { Config } from 'payload';
 
-export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void> => {
+export const seed: NonNullable<Config['onInit']> = async (
+  payload
+): Promise<void> => {
   const tenant1 = await payload.create({
     collection: 'tenants',
     data: {
@@ -8,7 +10,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       slug: 'gold',
       domain: 'gold.localhost',
     },
-  })
+  });
 
   const tenant2 = await payload.create({
     collection: 'tenants',
@@ -17,7 +19,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       slug: 'silver',
       domain: 'silver.localhost',
     },
-  })
+  });
 
   const tenant3 = await payload.create({
     collection: 'tenants',
@@ -26,7 +28,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       slug: 'bronze',
       domain: 'bronze.localhost',
     },
-  })
+  });
 
   await payload.create({
     collection: 'users',
@@ -35,7 +37,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       password: 'demo',
       roles: ['super-admin'],
     },
-  })
+  });
 
   await payload.create({
     collection: 'users',
@@ -50,7 +52,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       ],
       username: 'tenant1',
     },
-  })
+  });
 
   await payload.create({
     collection: 'users',
@@ -65,7 +67,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       ],
       username: 'tenant2',
     },
-  })
+  });
 
   await payload.create({
     collection: 'users',
@@ -80,7 +82,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       ],
       username: 'tenant3',
     },
-  })
+  });
 
   await payload.create({
     collection: 'users',
@@ -103,7 +105,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       ],
       username: 'multi-admin',
     },
-  })
+  });
 
   await payload.create({
     collection: 'pages',
@@ -112,7 +114,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       tenant: tenant1.id,
       title: 'Page for Tenant 1',
     },
-  })
+  });
 
   await payload.create({
     collection: 'pages',
@@ -121,7 +123,7 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       tenant: tenant2.id,
       title: 'Page for Tenant 2',
     },
-  })
+  });
 
   await payload.create({
     collection: 'pages',
@@ -130,5 +132,5 @@ export const seed: NonNullable<Config['onInit']> = async (payload): Promise<void
       tenant: tenant3.id,
       title: 'Page for Tenant 3',
     },
-  })
-}
+  });
+};

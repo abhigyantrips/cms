@@ -1,7 +1,8 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
-import { ensureUniqueSlug } from './hooks/ensureUniqueSlug'
-import { superAdminOrTenantAdminAccess } from '@/collections/Pages/access/superAdminOrTenantAdmin'
+import { superAdminOrTenantAdminAccess } from '@/collections/Pages/access/superAdminOrTenantAdmin';
+
+import { ensureUniqueSlug } from './hooks/ensureUniqueSlug';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -29,4 +30,4 @@ export const Pages: CollectionConfig = {
       index: true,
     },
   ],
-}
+};

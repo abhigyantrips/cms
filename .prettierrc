@@ -1,0 +1,32 @@
+{
+  "endOfLine": "lf",
+  "importOrder": [
+    "^(react/(.*)$)|^(react$)",
+    "^(next/(.*)$)|^(next$)",
+    "^(payload/(.*)$)|^(payload$)",
+    "^@payloadcms/(.*)$",
+    "^@payload-config",
+    "^@payload-types",
+    "^types$",
+    "^@/types",
+    "^@/config/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/utilities/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/collections/(.*)$",
+    "^@/components/(.*)$",
+    "^@/styles/(.*)$",
+    "^@/app/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}

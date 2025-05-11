@@ -1,18 +1,19 @@
-import type { Access } from 'payload'
+import type { Access } from 'payload';
 
-import { getUserTenantIDs } from '../../../utilities/getUserTenantIDs'
-import { isSuperAdmin } from '@/lib/is-super-admin'
-import { isAccessingSelf } from './isAccessingSelf'
+import { isSuperAdmin } from '@/lib/is-super-admin';
+
+import { getUserTenantIDs } from '../../../utilities/getUserTenantIDs';
+import { isAccessingSelf } from './isAccessingSelf';
 
 export const updateAndDeleteAccess: Access = ({ req, id }) => {
-  const { user } = req
+  const { user } = req;
 
   if (!user) {
-    return false
+    return false;
   }
 
   if (isSuperAdmin(user) || isAccessingSelf({ user, id })) {
-    return true
+    return true;
   }
 
   /**
@@ -27,5 +28,5 @@ export const updateAndDeleteAccess: Access = ({ req, id }) => {
     'tenants.tenant': {
       in: getUserTenantIDs(user, 'tenant-admin'),
     },
-  }
-}
+  };
+};

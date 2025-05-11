@@ -1,8 +1,10 @@
-import type { CollectionAfterLoginHook } from 'payload'
+import type { CollectionAfterLoginHook } from 'payload';
+import { generateCookie, getCookieExpiration, mergeHeaders } from 'payload';
 
-import { mergeHeaders, generateCookie, getCookieExpiration } from 'payload'
-
-export const setCookieBasedOnDomain: CollectionAfterLoginHook = async ({ req, user }) => {
+export const setCookieBasedOnDomain: CollectionAfterLoginHook = async ({
+  req,
+  user,
+}) => {
   const relatedOrg = await req.payload.find({
     collection: 'tenants',
     depth: 0,
@@ -12,7 +14,7 @@ export const setCookieBasedOnDomain: CollectionAfterLoginHook = async ({ req, us
         equals: req.headers.get('host'),
       },
     },
-  })
+  });
 
   // If a matching tenant is found, set the 'payload-tenant' cookie
   if (relatedOrg && relatedOrg.docs.length > 0) {
@@ -22,18 +24,18 @@ export const setCookieBasedOnDomain: CollectionAfterLoginHook = async ({ req, us
       path: '/',
       returnCookieAsObject: false,
       value: String(relatedOrg.docs[0].id),
-    })
+    });
 
     // Merge existing responseHeaders with the new Set-Cookie header
     const newHeaders = new Headers({
       'Set-Cookie': tenantCookie as string,
-    })
+    });
 
     // Ensure you merge existing response headers if they already exist
     req.responseHeaders = req.responseHeaders
       ? mergeHeaders(req.responseHeaders, newHeaders)
-      : newHeaders
+      : newHeaders;
   }
 
-  return user
-}
+  return user;
+};

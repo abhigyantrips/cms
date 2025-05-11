@@ -1,7 +1,8 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
-import { isSuperAdminAccess } from '@/lib/is-super-admin'
-import { updateAndDeleteAccess } from './access/updateAndDelete'
+import { isSuperAdminAccess } from '@/lib/is-super-admin';
+
+import { updateAndDeleteAccess } from './access/updateAndDelete';
 
 export const Tenants: CollectionConfig = {
   slug: 'tenants',
@@ -48,4 +49,4 @@ export const Tenants: CollectionConfig = {
       index: true,
     },
   ],
-}
+};
