@@ -1,16 +1,19 @@
 import type { CollectionConfig } from 'payload';
 
-import { isSuperAdminAccess } from '@/lib/is-super-admin';
-
-import { updateAndDeleteAccess } from './access/updateAndDelete';
+import {
+  createAccess,
+  deleteAccess,
+  readAccess,
+  updateAccess,
+} from '@/collections/tenants/access';
 
 export const Tenants: CollectionConfig = {
   slug: 'tenants',
   access: {
-    create: isSuperAdminAccess,
-    delete: updateAndDeleteAccess,
-    read: ({ req }) => Boolean(req.user),
-    update: updateAndDeleteAccess,
+    create: createAccess,
+    delete: deleteAccess,
+    read: readAccess,
+    update: updateAccess,
   },
   admin: {
     useAsTitle: 'name',

@@ -1,6 +1,6 @@
 import type { Tenant, User } from '@payload-types';
 
-import { extractID } from './extractID';
+import { extractID } from './extract-id';
 
 /**
  * Returns array of all tenant IDs assigned to a user

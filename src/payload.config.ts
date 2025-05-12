@@ -10,9 +10,8 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical';
 
 import type { Config } from '@payload-types';
 
-import { isSuperAdmin } from '@/lib/is-super-admin';
-
-import { getUserTenantIDs } from '@/utilities/getUserTenantIDs';
+import { getUserTenantIDs } from '@/utilities/get-user-tenant-ids';
+import { isSuperAdmin } from '@/utilities/is-super-admin';
 
 import { Pages } from '@/collections/Pages';
 import { Tenants } from '@/collections/Tenants';

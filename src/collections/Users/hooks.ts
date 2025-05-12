@@ -3,10 +3,9 @@ import { ValidationError } from 'payload';
 
 import { getTenantFromCookie } from '@payloadcms/plugin-multi-tenant/utilities';
 
-import { extractID } from '@/utilities/extractID';
-import { getCollectionIDType } from '@/utilities/getCollectionIDType';
-
-import { getUserTenantIDs } from '../../../utilities/getUserTenantIDs';
+import { extractID } from '@/utilities/extract-id';
+import { getCollectionIDType } from '@/utilities/get-collection-id-type';
+import { getUserTenantIDs } from '@/utilities/get-user-tenant-ids';
 
 export const ensureUniqueUsername: FieldHook = async ({
   data,

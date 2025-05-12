@@ -2,14 +2,16 @@ import type { CollectionConfig } from 'payload';
 
 import { tenantsArrayField } from '@payloadcms/plugin-multi-tenant/fields';
 
-import { isSuperAdmin } from '@/lib/is-super-admin';
+import { isSuperAdmin } from '@/utilities/is-super-admin';
 
-import { createAccess } from './access/create';
-import { readAccess } from './access/read';
-import { updateAndDeleteAccess } from './access/updateAndDelete';
-import { externalUsersLogin } from './endpoints/externalUsersLogin';
-import { ensureUniqueUsername } from './hooks/ensureUniqueUsername';
-import { setCookieBasedOnDomain } from './hooks/setCookieBasedOnDomain';
+import {
+  createAccess,
+  deleteAccess,
+  readAccess,
+  updateAccess,
+} from '@/collections/users/access';
+import { externalUsersLogin } from '@/collections/users/endpoints';
+import { ensureUniqueUsername } from '@/collections/users/hooks';
 
 const defaultTenantArrayField = tenantsArrayField({
   tenantsArrayFieldName: 'tenants',
@@ -33,9 +35,9 @@ const Users: CollectionConfig = {
   slug: 'users',
   access: {
     create: createAccess,
-    delete: updateAndDeleteAccess,
+    delete: deleteAccess,
     read: readAccess,
-    update: updateAndDeleteAccess,
+    update: updateAccess,
   },
   admin: {
     useAsTitle: 'email',
@@ -74,13 +76,6 @@ const Users: CollectionConfig = {
       },
     },
   ],
-  // The following hook sets a cookie based on the domain a user logs in from.
-  // It checks the domain and matches it to a tenant in the system, then sets
-  // a 'payload-tenant' cookie for that tenant.
-
-  hooks: {
-    afterLogin: [setCookieBasedOnDomain],
-  },
 };
 
 export default Users;
