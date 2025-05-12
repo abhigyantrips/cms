@@ -31,7 +31,7 @@ const defaultTenantArrayField = tenantsArrayField({
   ],
 });
 
-const Users: CollectionConfig = {
+export const Users: CollectionConfig = {
   slug: 'users',
   access: {
     create: createAccess,
@@ -77,5 +77,3 @@ const Users: CollectionConfig = {
     },
   ],
 };
-
-export default Users;

@@ -9,8 +9,8 @@ import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts';
 
 import config from '@payload-config';
 
-import { importMap } from './admin/importMap.js';
 import './custom.scss';
+import { importMap } from './importMap.js';
 
 type Args = {
   children: React.ReactNode;

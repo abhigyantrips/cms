@@ -13,15 +13,18 @@ import type { Config } from '@payload-types';
 import { getUserTenantIDs } from '@/utilities/get-user-tenant-ids';
 import { isSuperAdmin } from '@/utilities/is-super-admin';
 
-import { Pages } from '@/collections/Pages';
-import { Tenants } from '@/collections/Tenants';
-import Users from '@/collections/Users';
+import { Pages } from '@/collections/pages';
+import { Tenants } from '@/collections/tenants';
+import { Users } from '@/collections/users';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 // eslint-disable-next-line no-restricted-exports
 export default buildConfig({
+  routes: {
+    admin: '/',
+  },
   admin: {
     user: 'users',
   },
