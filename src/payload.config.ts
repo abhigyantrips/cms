@@ -1,4 +1,3 @@
-import { seed } from '@/seed';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -34,11 +33,6 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI,
     },
   }),
-  onInit: async (args) => {
-    if (process.env.SEED_DB) {
-      await seed(args);
-    }
-  },
   editor: lexicalEditor({}),
   graphQL: {
     schemaOutputFile: path.resolve(dirname, 'generated-schema.graphql'),
